@@ -51,8 +51,8 @@ class SpatialTransformer(nn.Module):
     ) -> torch.Tensor:
         batch_images = x
         x = self._conv(x)
-        # attn_map = self._attn_extractor(x)  # B, Heads, H, W
 
+        # attn_map = self._attn_extractor(x)  # B, Heads, H, W
         # heads: t.List[torch.Tensor] = torch.split(attn_map, 1, dim=1)
 
         # features = []
@@ -80,8 +80,6 @@ class SpatialTransformer(nn.Module):
             trans = trans.view(-1, 2, 1)
 
             x = torch.cat([rot, trans], dim=2)
-
-            print(x[0])
 
             if size is not None:
                 grid_size = [x.size(0), self._in_ch, *size]
