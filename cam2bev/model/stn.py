@@ -41,7 +41,7 @@ class SpatialTransformer(nn.Module):
         )
 
         self._fc1 = nn.Linear(self._inter, 4 * self._inter)
-        self._fc2_trans = nn.Linear(4 * self._inter, 6)
+        self._fc2_trans = nn.Linear(4 * self._inter, 2)
         self._fc2_rot = nn.Linear(4 * self._inter, 4)
 
     def forward(
