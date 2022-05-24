@@ -55,9 +55,10 @@ class SpatialTransformer(nn.Module):
 
         heads: t.List[torch.Tensor] = torch.split(attn_map, 1, dim=1)
 
-        features = []
-        for head in heads:
-            features.append(torch.sum(x * head, dim=(2, 3)))  # functional is B, inter
+        # features = []
+        # for head in heads:
+        #     features.append(torch.sum(x * head, dim=(2, 3)))  # functional is B, inter
+        features = functional.adaptive_max_pool2d(x)
 
         resampled_rois = []
 
