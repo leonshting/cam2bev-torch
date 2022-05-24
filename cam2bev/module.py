@@ -48,7 +48,7 @@ class ModuleV1(pl.LightningModule):
         return loss
 
     def validation_step(self, val_batch, batch_idx):
-        gt = torch.tensor(val_batch[self._label_key], dtype=torch.float)  # B, H, W, N
+        gt = val_batch[self._label_key]  # B, H, W, N
         logits = self.forward(batch=val_batch)
 
         loss_per_pixel = -functional.log_softmax(logits, dim=3) * gt
