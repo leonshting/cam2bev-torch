@@ -9,7 +9,7 @@ model:
 training:
   type: ModuleV1
   params:
-    key_order: [front, left, right, back]
+    key_order: [front, left, right, rear]
     label_key: bev
 
   log_dir: ...
@@ -210,7 +210,7 @@ data:
     - front
     - left
     - right
-    - back
+    - rear
     - bev
 
   train_dataset:
