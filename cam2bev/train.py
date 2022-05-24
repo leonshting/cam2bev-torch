@@ -52,6 +52,7 @@ def train(config: omegaconf.DictConfig):
         accelerator='ddp' if len(config.training.gpu) > 1 else None,
         max_epochs=config.training.num_epochs,
         progress_bar_refresh_rate=1,
+        default_root_dir=config.training.log_dir,
     )
 
     trainer.fit(mod, train_dataloader, val_dataloader)
