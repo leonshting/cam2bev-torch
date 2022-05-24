@@ -75,6 +75,8 @@ class SpatialTransformer(nn.Module):
 
             x = x.view(-1, 2, 3)  # change it to the 2x3 matrix
 
+            print(x[0])
+
             if size is not None:
                 grid_size = [x.size(0), self._in_ch, *size]
             else:
