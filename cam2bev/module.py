@@ -31,7 +31,7 @@ class ModuleV1(pl.LightningModule):
         return self._model.forward(*ordered)  # B, H, W, n_classes; logits
 
     def configure_optimizers(self):
-        optimizer = torch.optim.SGD(self.parameters())
+        optimizer = torch.optim.SGD(self.parameters(), lr=1e-2)
         sch = torch.optim.lr_scheduler.ReduceLROnPlateau(
             optimizer, 'min', factor=0.1,
         )
