@@ -39,12 +39,14 @@ def train(config: omegaconf.DictConfig):
         dataset=train_dataset,
         batch_size=config.training.batch_size,
         shuffle=True,
+        num_workers=4,
     )
 
     val_dataloader = td.DataLoader(
         dataset=test_dataset,
         batch_size=config.training.batch_size,
         shuffle=False,
+        num_workers=4,
     )
 
     trainer = pl.Trainer(
