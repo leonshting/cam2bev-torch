@@ -217,7 +217,6 @@ model:
     n_in_channels: 10
     n_out_channels: 64
     stn_feature_dim: 256
-    spatial_size: *target_size
 
 training:
   type: ModuleV1

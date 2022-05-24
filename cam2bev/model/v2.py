@@ -3,7 +3,8 @@ import typing as t
 import torch
 import torch.nn as nn
 
-from timm.models import swin_transformer
+from timm.models import convnext
+
 
 from . import common
 from . import types
@@ -49,7 +50,6 @@ class UNetV2(nn.Module):
             n_in_channels: int,
             n_out_channels: int,
             feature_dim: int = 256,
-            spatial_size: t.Tuple[int, int] = (256, 256),
     ):
         super(UNetV2, self).__init__()
 
@@ -59,10 +59,7 @@ class UNetV2(nn.Module):
             use_dropout=True,
         )
 
-        assert spatial_size[0] == spatial_size[1]  # c'est la vie
-        self.extractor = swin_transformer.SwinTransformer(
-            window_size=8,
-            img_size=spatial_size[0],
+        self.extractor = convnext.ConvNeXt(
             in_chans=n_in_channels,
             num_classes=feature_dim,
         )
@@ -87,7 +84,6 @@ class NUNetV2(nn.Module, types.I2IModel):
             n_in_channels: int = 3,
             n_out_channels: int = 64,
             stn_feature_dim: int = 256,
-            spatial_size: t.Tuple[int, int] = (256, 256),
     ):
         super(NUNetV2, self).__init__()
 
@@ -99,7 +95,6 @@ class NUNetV2(nn.Module, types.I2IModel):
                 UNetV2(
                     n_in_channels=n_in_channels,
                     n_out_channels=n_out_channels,
-                    spatial_size=spatial_size,
                     feature_dim=stn_feature_dim,
                 )
             )
