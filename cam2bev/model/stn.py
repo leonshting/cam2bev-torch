@@ -58,7 +58,7 @@ class SpatialTransformer(nn.Module):
         # features = []
         # for head in heads:
         #     features.append(torch.sum(x * head, dim=(2, 3)))  # functional is B, inter
-        features = functional.adaptive_max_pool2d(x)
+        features = functional.adaptive_max_pool2d(x, output_size=(1, 1))
 
         resampled_rois = []
 
