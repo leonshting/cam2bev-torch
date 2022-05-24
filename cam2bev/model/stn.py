@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as functional
 
-from cam2bev.model import common
+from . import common
 
 
 class SpatialTransformer(nn.Module):
