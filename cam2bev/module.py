@@ -46,6 +46,7 @@ class ModuleV1(pl.LightningModule):
         # loss = torch.mean(loss_per_pixel * loss_weight)
 
         loss = torch.mean(loss_per_pixel)
+        self.log('train_loss', loss)
 
         return loss
 
