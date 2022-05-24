@@ -77,9 +77,9 @@ class SpatialTransformer(nn.Module):
                 trans = self._fc2_trans(x)
 
             rot = rot.view(-1, 2, 2)
-            trans = trans.view(-1, 1, 2)
+            trans = trans.view(-1, 2, 1)
 
-            x = torch.cat([rot, trans], dim=1)
+            x = torch.cat([rot, trans], dim=2)
 
             print(x[0])
 
