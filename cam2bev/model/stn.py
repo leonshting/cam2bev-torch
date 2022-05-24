@@ -41,7 +41,8 @@ class SpatialTransformer(nn.Module):
         )
 
         self._fc1 = nn.Linear(self._inter, 4 * self._inter)
-        self._fc2 = nn.Linear(4 * self._inter, 6)
+        self._fc2_trans = nn.Linear(4 * self._inter, 6)
+        self._fc2_rot = nn.Linear(4 * self._inter, 4)
 
     def forward(
             self,
@@ -68,12 +69,17 @@ class SpatialTransformer(nn.Module):
             x = x.view(-1, self._inter)
             if self._dropout:
                 x = functional.dropout(self._fc1(x), p=0.5)
-                x = functional.dropout(self._fc2(x), p=0.5)
+                rot = self._fc2_rot(x)
+                trans = self._fc2_trans(x)
             else:
                 x = self._fc1(x)
-                x = self._fc2(x)  # params [Nx6]
+                rot = self._fc2_rot(x)
+                trans = self._fc2_trans(x)
 
-            x = x.view(-1, 2, 3)  # change it to the 2x3 matrix
+            rot = rot.view(-1, 2, 2)
+            trans = trans.view(-1, 1, 2)
+
+            x = torch.cat([rot, trans], dim=1)
 
             print(x[0])
 
