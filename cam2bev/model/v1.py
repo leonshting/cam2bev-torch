@@ -41,7 +41,8 @@ class UNetV1(nn.Module):
 
         for num, _ in enumerate(self.channels[1:]):
             stn_mod: stn.SpatialTransformer = getattr(self, f'stn_{num}')
-            resampled.append(stn_mod.forward(raw[-1]))
+            # resampled.append(stn_mod.forward(raw[-1]))
+            resampled.append(raw[-1])
 
             down_mod: common.Down = getattr(self, f'down_{num}')
             raw.append(down_mod.forward(raw[-1]))
