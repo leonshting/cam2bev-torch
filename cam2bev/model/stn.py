@@ -49,11 +49,10 @@ class SpatialTransformer(nn.Module):
             size: t.Optional[t.Tuple[int, int]] = None,
     ) -> torch.Tensor:
         batch_images = x
+        x = self._conv(x)
+        # attn_map = self._attn_extractor(x)  # B, Heads, H, W
 
-        x = self._conv(x.detach())
-        attn_map = self._attn_extractor(x)  # B, Heads, H, W
-
-        heads: t.List[torch.Tensor] = torch.split(attn_map, 1, dim=1)
+        # heads: t.List[torch.Tensor] = torch.split(attn_map, 1, dim=1)
 
         # features = []
         # for head in heads:
