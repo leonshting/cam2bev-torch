@@ -44,7 +44,7 @@ class UNetV1(nn.Module):
             resampled.append(stn_mod.forward(raw[-1]))
 
             down_mod: common.Down = getattr(self, f'down_{num}')
-            raw.append(down_mod.forward(raw[-1]))
+            raw.append(down_mod.forward(resampled[-1]))
 
         up_running = self.up_0(raw[-1], resampled[-1])
         for num, resampled_t in enumerate(reversed(resampled)):
