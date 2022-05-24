@@ -23,7 +23,7 @@ def get_training_module(
     raise NotImplementedError
 
 
-@hydra.main(config_path='../configs', config_name='train')
+@hydra.main(config_path='../configs', config_name='train_v2')
 def train(config: omegaconf.DictConfig):
 
     train_dataset = data.get_dataset(config.data.train_dataset)

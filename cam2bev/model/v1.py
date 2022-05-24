@@ -22,7 +22,7 @@ class UNetV1(nn.Module):
         for num, (in_ch, out_ch) in enumerate(zip(channels, channels[1:])):
             self.add_module(
                 name=f'stn_{num}',
-                module=stn.SpatialTransformer(n_heads=1, in_channels=in_ch))
+                module=stn.SpatialTransformer(in_channels=in_ch))
 
             self.add_module(
                 name=f'down_{num}',

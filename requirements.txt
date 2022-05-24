@@ -3,4 +3,6 @@ numpy==1.21.6
 omegaconf==2.2.1
 Pillow==9.1.1
 pytorch_lightning==1.6.3
+PyYAML==6.0
 torch==1.8.1
+torchvision==0.9.1
