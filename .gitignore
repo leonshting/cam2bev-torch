@@ -79,7 +79,7 @@ target/
 .ipynb_checkpoints
 
 # JetBrains
-.idea
+.idea/
 
 # IPython
 profile_default/

@@ -1,5 +1,6 @@
 import os
 import glob
+import yaml
 import typing as t
 
 import numpy as np
@@ -147,3 +148,21 @@ def test_images_usage():
     sample = dataset[0]
     for k, im in sample.items():
         im.show()
+
+
+def test_masks_usage():
+    cwd = os.path.dirname(__file__)
+    root = os.path.join(cwd, '../../samples')
+    folders = ['bev', 'left', 'right']
+
+    config = yaml.safe_load(open(os.path.join(cwd, '../../configs/train.yaml')))
+    dataset = MultiFolderMasks(
+        root=root,
+        folders=folders,
+        conversion_map=config['data']['conversion_map'],
+    )
+
+    sample = dataset[0]
+    for k, v in sample.items():
+        img_arr = torch.argmax(v, dim=0).numpy().astype('uint8') * 25
+        Image.fromarray(img_arr).show()
