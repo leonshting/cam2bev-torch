@@ -2,7 +2,7 @@ model:
   type: NUNetV1
   params:
     channels: [ 64, 128, 256, 384, 512 ]
-    n_inputs: 2
+    n_inputs: 4
     n_classes: 10
     n_input_channels: 10
 
