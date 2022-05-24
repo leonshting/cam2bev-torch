@@ -42,8 +42,10 @@ class ModuleV1(pl.LightningModule):
         logits = self.forward(batch=train_batch)
 
         loss_per_pixel = -functional.log_softmax(logits, dim=3) * gt
-        loss_weight = torch.sqrt(torch.mean(gt, dim=(0, 1, 2), keepdim=True))
-        loss = torch.mean(loss_per_pixel * loss_weight)
+        # loss_weight = torch.sqrt(torch.mean(gt, dim=(0, 1, 2), keepdim=True))
+        # loss = torch.mean(loss_per_pixel * loss_weight)
+
+        loss = torch.mean(loss_per_pixel)
 
         return loss
 
@@ -52,7 +54,9 @@ class ModuleV1(pl.LightningModule):
         logits = self.forward(batch=val_batch)
 
         loss_per_pixel = -functional.log_softmax(logits, dim=3) * gt
-        loss_weight = torch.sqrt(torch.mean(gt, dim=(0, 1, 2), keepdim=True))
-        loss = torch.mean(loss_per_pixel * loss_weight)
+        # loss_weight = torch.sqrt(torch.mean(gt, dim=(0, 1, 2), keepdim=True))
+        # loss = torch.mean(loss_per_pixel * loss_weight)
+
+        loss = torch.mean(loss_per_pixel)
 
         return loss
